@@ -46,12 +46,13 @@ system_prompt = st.sidebar.text_area("Edit system prompt:", height=100, value=sy
 
 # Load saved system prompts
 saved_system_prompts = [f"{filename.split('.')[0]}" for filename in os.listdir(system_prompts_dir) if filename.endswith(".txt")]
-selected_system_prompt = st.sidebar.selectbox("Select saved system prompt:", saved_system_prompts)
+selected_system_prompt = st.sidebar.selectbox("Select saved system prompt:", saved_system_prompts, index=None)
 
 if selected_system_prompt:
     with open(os.path.join(system_prompts_dir, f"{selected_system_prompt}.txt"), "r") as f:
         system_prompt = f.read()
-
+else: system_prompt = "You are a helpful assistant."
+    
 # Chat history
 if "messages" not in st.session_state:
     st.session_state.messages = []
