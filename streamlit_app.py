@@ -135,14 +135,7 @@ def create_model(model_name, system_prompt, temperature, top_p, top_k, max_outpu
 
 # Initialize the chat session with the applied configuration
 if "chat_session" not in st.session_state:
-    st.session_state.chat_session = create_model()
-        selected_model,
-        system_prompt,
-        temperature,
-        top_p,
-        top_k,
-        max_output_tokens
-    ).start_chat(history=[])
+    st.session_state.chat_session = create_model(selected_model, system_prompt, temperature, top_p, top_k, max_output_tokens).start_chat(history=[])
     st.session_state.applied_model = selected_model
     st.session_state.applied_system_prompt = system_prompt
     st.session_state.applied_temperature = temperature
