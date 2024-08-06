@@ -38,6 +38,9 @@ system_prompts_dir = "system_prompts"
 if not os.path.exists(system_prompts_dir):
     os.makedirs(system_prompts_dir)
 
+# Default system prompt
+system_prompt = "You are a helpful assistant."
+
 # Sidebar for editing system prompt
 system_prompt = st.sidebar.text_area("Edit system prompt:", height=100, value=system_prompt)
 
