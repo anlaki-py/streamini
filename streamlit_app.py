@@ -33,11 +33,6 @@ if new_api_key:
 
 genai.configure(api_key=api_key)
 
-# System prompt editing and saving
-system_prompts_dir = "system_prompts"
-if not os.path.exists(system_prompts_dir):
-    os.makedirs(system_prompts_dir)
-
 # Default system prompt
 system_prompt = "You are a helpful assistant."
 
