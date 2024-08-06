@@ -20,7 +20,6 @@ models = [
 
 # Streamlit UI
 st.set_page_config(layout="wide", page_title="Gemini AI Chatbot")
-# st.title("Chatbot with Gemini Pro")
 
 # Model selection in sidebar
 selected_model = st.sidebar.selectbox("Select the model:", models)
@@ -48,7 +47,22 @@ selected_system_prompt = st.sidebar.selectbox("Select saved system prompt:", sav
 if selected_system_prompt:
     with open(os.path.join(system_prompts_dir, f"{selected_system_prompt}.txt"), "r") as f:
         system_prompt = f.read()
-    
+
+# Add sliders for generation configuration
+st.sidebar.header("Adjust Model Parameters")
+temperature = st.sidebar.slider("Temperature", 0.0, 2.0, 1.0, 0.1)
+top_p = st.sidebar.slider("Top-p (Nucleus Sampling)", 0.0, 1.0, 0.95, 0.01)
+top_k = st.sidebar.slider("Top-k", 0, 100, 64, 1)
+max_output_tokens = st.sidebar.slider("Max Output Tokens", 1, 8192, 8192, 1)
+
+# Apply button for system prompt and sliders
+if st.sidebar.button("Apply Configuration"):
+    st.session_state.applied_system_prompt = system_prompt
+    st.session_state.applied_temperature = temperature
+    st.session_state.applied_top_p = top_p
+    st.session_state.applied_top_k = top_k
+    st.session_state.applied_max_output_tokens = max_output_tokens
+
 # Chat history
 if "messages" not in st.session_state:
     st.session_state.messages = []
@@ -73,12 +87,12 @@ if st.sidebar.button("Clean chat"):
     st.session_state.messages = []
 
 # Create and configure the model based on the selected model
-def create_model(model_name):
+def create_model(model_name, system_prompt, temperature, top_p, top_k, max_output_tokens):
     generation_config = {
-        "temperature": 1,
-        "top_p": 0.95,
-        "top_k": 64,
-        "max_output_tokens": 8192,
+        "temperature": temperature,
+        "top_p": top_p,
+        "top_k": top_k,
+        "max_output_tokens": max_output_tokens,
         "response_mime_type": "text/plain",
     }
 
@@ -107,7 +121,14 @@ def create_model(model_name):
 
 # Initialize the chat session if not already in session state or if the model is changed
 if "chat_session" not in st.session_state or st.session_state.get("current_model") != selected_model:
-    st.session_state.chat_session = create_model(selected_model).start_chat(history=[])
+    st.session_state.chat_session = create_model(
+        selected_model,
+        st.session_state.get("applied_system_prompt", system_prompt),
+        st.session_state.get("applied_temperature", temperature),
+        st.session_state.get("applied_top_p", top_p),
+        st.session_state.get("applied_top_k", top_k),
+        st.session_state.get("applied_max_output_tokens", max_output_tokens)
+    ).start_chat(history=[])
     st.session_state.current_model = selected_model
 
 # Get user input
