@@ -43,7 +43,7 @@ system_prompt = "You are a helpful assistant."
 
 # Load saved system prompts
 saved_system_prompts = [f"{filename.split('.')[0]}" for filename in os.listdir(system_prompts_dir) if filename.endswith(".txt")]
-selected_system_prompt = st.sidebar.selectbox("Select saved system prompt:", saved_system_prompts, index=None)
+selected_system_prompt = st.sidebar.selectbox("Select saved system prompt:", saved_system_prompts)
 
 if selected_system_prompt:
     with open(os.path.join(system_prompts_dir, f"{selected_system_prompt}.txt"), "r") as f:
