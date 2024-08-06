@@ -33,14 +33,21 @@ if new_api_key:
 
 genai.configure(api_key=api_key)
 
+# System prompt editing and saving
+system_prompts_dir = "system_prompts"
+if not os.path.exists(system_prompts_dir):
+    os.makedirs(system_prompts_dir)
+
+# Sidebar for editing system prompt
+system_prompt = st.sidebar.text_area("Edit system prompt:", height=100, value=system_prompt)
+
 # Load saved system prompts
 saved_system_prompts = [f"{filename.split('.')[0]}" for filename in os.listdir(system_prompts_dir) if filename.endswith(".txt")]
-selected_system_prompt = st.sidebar.selectbox("Select saved system prompt:", saved_system_prompts)
+selected_system_prompt = st.sidebar.selectbox("Select saved system prompt:", saved_system_prompts, index=None)
 
 if selected_system_prompt:
     with open(os.path.join(system_prompts_dir, f"{selected_system_prompt}.txt"), "r") as f:
         system_prompt = f.read()
-else: system_prompt = "You are a helpful assistant."
     
 # Chat history
 if "messages" not in st.session_state:
