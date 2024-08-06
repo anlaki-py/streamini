@@ -65,14 +65,7 @@ if st.sidebar.button("Apply Configuration"):
     st.session_state.applied_max_output_tokens = max_output_tokens
 
     # Reinitialize the chat session with the new configuration
-    st.session_state.chat_session = create_model(
-        st.session_state.applied_model,
-        st.session_state.applied_system_prompt,
-        st.session_state.applied_temperature,
-        st.session_state.applied_top_p,
-        st.session_state.applied_top_k,
-        st.session_state.applied_max_output_tokens
-    ).start_chat(history=[])
+    st.session_state.chat_session = create_model(st.session_state.applied_model, st.session_state.applied_system_prompt, st.session_state.applied_temperature, st.session_state.applied_top_p, st.session_state.applied_top_k, st.session_state.applied_max_output_tokens).start_chat(history=[])
 
     st.session_state.messages = []  # Clear the chat history on new configuration
     st.experimental_rerun()  # Rerun to update the UI with the new session
