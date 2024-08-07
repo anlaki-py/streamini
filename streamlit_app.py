@@ -3,7 +3,6 @@ import streamlit as st
 import google.generativeai as genai
 import json
 from datetime import datetime
-import time
 
 # Set the API key from the environmental variable
 api_key = os.getenv("GEMINI_API_KEY")
@@ -172,17 +171,10 @@ if user_message:
         else:
             response = st.session_state.chat_session.send_message(user_message)
 
-        # Stream AI response
-        with st.chat_message("assistant") as msg:
-            full_response = ""
-            # Assuming response.text is a generator or iterable
-            for chunk in response.text.split(' '):  # Adjust this based on how your API returns the response
-                full_response += chunk + ' '
-                msg.markdown(full_response + "▌")  # Display the response incrementally
-                time.sleep(0.05)  # Simulate typing delay
-
         # Add AI response to chat history
-        st.session_state.messages.append({"role": "assistant", "content": full_response})
+        st.session_state.messages.append({"role": "assistant", "content": response.text})
 
+        # Display the AI's response
+        st.chat_message("assistant").markdown(response.text)
     except Exception as e:
         st.error(f"An error occurred: {e}")
