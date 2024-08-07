@@ -73,6 +73,6 @@ if prompt := st.chat_input("What is up?"):
         except Exception as e:
             st.error(f"An error occurred: {e}")
             st.session_state.messages.append(
-                {"role": "assistant", "content": "Sorry, I can't respond right now. Please try again later."}
+                {"role": "assistant", "content": f"Sorry, I can't respond right now. Error: {e}"}
             )
             st.rerun()
