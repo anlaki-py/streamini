@@ -82,16 +82,3 @@ You can create and save custom system prompts via the Streamlit sidebar. Saved p
 ### Conversation History
 
 Save the current conversation from the sidebar, and it will be stored in the `history/` directory. Load previously saved conversations as needed.
-
-## Contributing
-
-Contributions are welcome! Feel free to open issues or submit pull requests to improve the app.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgements
-
-- [Streamlit](https://streamlit.io/) - The web framework used for building this app.
-- [Google Gemini AI](https://cloud.google.com/genai) - The AI models used in the chatbot.
