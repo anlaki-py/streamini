@@ -1,6 +1,6 @@
-# Aki Gemini AI Chatbot :sparkles:
+# Streamini :sparkles:
 
-Aki Gemini AI Chatbot is a conversational AI application built with Streamlit and the Google Gemini API. This app allows users to interact with different Gemini AI models, customize prompts, and manage conversation history effectively.
+Streamini is a conversational AI application built with Streamlit and the Google Gemini API. This app allows users to interact with different Gemini AI models, customize prompts, and manage conversation history effectively.
 
 ## Features
 
