@@ -8,7 +8,7 @@ Aki Gemini AI Chatbot is a conversational AI application built with Streamlit an
 - **System Prompt Customization:** Modify and save system prompts to guide the AI's behavior.
 - **Conversation Management:** Save and load conversations for later use.
 - **Response Customization:** Adjust AI response parameters such as temperature, top-p, top-k, and max output tokens.
-- **Chat Editing:** Edit the AI's responses directly in the chat interface.
+- **Chat Editing:** ~~Edit the AI's responses directly in the chat interface.~~
 
 ## Installation
 
