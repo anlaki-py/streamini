@@ -20,7 +20,7 @@ models = [
 
 # Streamlit UI
 st.set_page_config(layout="wide", page_title="Aki Gemini AI Chatbot", page_icon=":sparkles:")
-st.header("Gemini :sparkles:")
+st.header("Streamini :sparkles:")
 
 # Model selection in sidebar
 selected_model = st.sidebar.selectbox("Select the model:", models)
